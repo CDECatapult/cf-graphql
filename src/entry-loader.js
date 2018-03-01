@@ -50,6 +50,9 @@ function createEntryLoader (http) {
   function getOne (id, forcedCtId) {
     return loader.load(id)
     .then(res => {
+      if (typeof res === 'undefined') {
+        throw new Error(`Cannot load #${id}, probably unpublished content`);
+      }
       const ctId = _get(res, ['sys', 'contentType', 'sys', 'id']);
       if (forcedCtId && ctId !== forcedCtId) {
         throw new Error('Does not match the forced Content Type ID.');
