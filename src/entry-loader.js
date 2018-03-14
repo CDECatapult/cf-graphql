@@ -4,6 +4,7 @@ const _get = require('lodash.get');
 const chunk = require('lodash.chunk');
 const qs = require('querystring');
 const DataLoader = require('dataloader');
+const warning = require('warning');
 
 const INCLUDE_DEPTH = 1;
 const CHUNK_SIZE = 100;
@@ -51,7 +52,8 @@ function createEntryLoader (http) {
     return loader.load(id)
     .then(res => {
       if (typeof res === 'undefined') {
-        throw new Error(`Cannot load #${id}, probably unpublished content`);
+        warning(true, `Cannot load #${id}, probably unpublished content`);
+        return null;
       }
       const ctId = _get(res, ['sys', 'contentType', 'sys', 'id']);
       if (forcedCtId && ctId !== forcedCtId) {
