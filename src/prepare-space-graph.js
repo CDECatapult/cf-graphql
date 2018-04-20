@@ -82,16 +82,19 @@ function field (f, enforceRequiredFields) {
   return {
     id: f.id,
     required: enforceRequiredFields && f.required,
-    type: type(f),
+    type: type(f, enforceRequiredFields),
     linkedCt: linkedCt(f)
   };
 }
 
-function type (f) {
+function type (f, enforceRequiredFields) {
   if (f.type === 'Array') {
     if (f.items.type === 'Symbol') {
       return 'Array<String>';
     } else if (f.items.type === 'Link' && isEntityType(f.items.linkType)) {
+      if (!enforceRequiredFields && f.items.linkType === 'Asset') {
+        return 'Array<Link<AssetPreview>>';
+      }
       return `Array<Link<${f.items.linkType}>>`;
     } else {
       throw new Error('Invalid field of a type "Array"');
@@ -99,6 +102,9 @@ function type (f) {
   }
 
   if (f.type === 'Link') {
+    if (!enforceRequiredFields && f.linkType === 'Asset') {
+      return 'Link<AssetPreview>';
+    }
     if (isEntityType(f.linkType)) {
       return `Link<${f.linkType}>`;
     } else {

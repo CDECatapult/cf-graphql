@@ -11,7 +11,7 @@ const {
   GraphQLList
 } = require('graphql');
 
-const {AssetType, EntryType, LocationType} = require('./base-types.js');
+const {AssetType, AssetTypePreview, EntryType, LocationType} = require('./base-types.js');
 
 const NOTHING = {};
 
@@ -29,6 +29,8 @@ module.exports = {
   'Array<String>': createArrayOfStringsFieldConfig,
   'Link<Asset>': createAssetFieldConfig,
   'Array<Link<Asset>>': createArrayOfAssetsFieldConfig,
+  'Link<AssetPreview>': createAssetPreviewFieldConfig,
+  'Array<Link<AssetPreview>>': createArrayOfAssetsPreviewFieldConfig,
   'Link<Entry>': createEntryFieldConfig,
   'Array<Link<Entry>>': createArrayOfEntriesFieldConfig
 };
@@ -59,6 +61,18 @@ function createAssetFieldConfig (field) {
 
 function createArrayOfAssetsFieldConfig (field) {
   return createFieldConfig(new GraphQLList(new GraphQLNonNull(AssetType)), field, (links, ctx) => {
+    if (Array.isArray(links)) {
+      return links.map(link => getAsset(link, ctx)).filter(isObject);
+    }
+  });
+}
+
+function createAssetPreviewFieldConfig (field) {
+  return createFieldConfig(AssetTypePreview, field, getAsset);
+}
+
+function createArrayOfAssetsPreviewFieldConfig (field) {
+  return createFieldConfig(new GraphQLList(new GraphQLNonNull(AssetTypePreview)), field, (links, ctx) => {
     if (Array.isArray(links)) {
       return links.map(link => getAsset(link, ctx)).filter(isObject);
     }

@@ -55,6 +55,25 @@ const AssetType = new GraphQLObjectType({
   }
 });
 
+const AssetTypePreview = new GraphQLObjectType({
+  name: 'Asset',
+  fields: {
+    sys: { type: AssetSysType },
+    title: {
+      type: GraphQLString,
+      resolve: asset => _get(asset, ['fields', 'title']),
+    },
+    description: {
+      type: GraphQLString,
+      resolve: asset => _get(asset, ['fields', 'description']),
+    },
+    url: {
+      type: GraphQLString,
+      resolve: asset => _get(asset, ['fields', 'url']),
+    },
+  },
+});
+
 const EntryType = new GraphQLInterfaceType({
   name: 'Entry',
   fields: {sys: {type: EntrySysType}}
@@ -77,6 +96,7 @@ module.exports = {
   IDType,
   SysType,
   AssetSysType,
+  AssetTypePreview,
   EntrySysType,
   AssetType,
   EntryType,
