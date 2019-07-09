@@ -8,7 +8,9 @@
     "deploy-now": "now --public -e SPACE_ID -e CDA_TOKEN -e CMA_TOKEN",
     "deploy-demo-now": "now --public",
     "lint": "eslint '*.js' 'src/*.js'",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "now": {
     "engines": {
@@ -30,7 +32,8 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-apollo": "^1.4.2",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "snyk": "^1.192.4"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -43,5 +46,6 @@
     "eslint-plugin-react": "^7.1.0",
     "now": "^7.1.0",
     "webpack": "^2.6.1"
-  }
+  },
+  "snyk": true
 }
