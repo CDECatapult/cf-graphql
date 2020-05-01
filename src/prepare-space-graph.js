@@ -21,6 +21,7 @@ const SHORTCUT_FIELD_TYPE_MAPPING = {
 const SIMPLE_FIELD_TYPE_MAPPING = {
   Symbol: 'String',
   Text: 'String',
+	RichText: 'String',
   Number: 'Float',
   Integer: 'Int',
   Date: 'String',
