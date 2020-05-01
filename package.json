@@ -65,7 +65,7 @@
     "express": "^4.17.1",
     "express-graphql": "^0.6.7",
     "fetch-graphql-schema": "^0.2.1",
-    "graphql": "^0.13.0",
+    "graphql": "^14.6.0",
     "graphqlviz": "^2.0.1",
     "istanbul": "^0.4.5",
     "just-extend": "1.1.22",
@@ -76,6 +76,6 @@
     "tape": "^4.8.0"
   },
   "peerDependencies": {
-    "graphql": "^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0"
+    "graphql": "^0.13.0 || ^14.0.0 || ^15.0.0"
   }
 }
