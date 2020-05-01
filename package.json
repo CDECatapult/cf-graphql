@@ -63,7 +63,7 @@
     "codecov": "^3.6.5",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
-    "express-graphql": "^0.6.7",
+    "express-graphql": "^0.9.0",
     "fetch-graphql-schema": "^0.2.1",
     "graphql": "^14.6.0",
     "graphqlviz": "^2.0.1",
