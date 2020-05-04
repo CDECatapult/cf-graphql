@@ -50,6 +50,7 @@
     "codecov": "cat coverage/coverage.json | codecov"
   },
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^13.4.0",
     "dataloader": "^1.3.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.chunk": "^4.2.0",

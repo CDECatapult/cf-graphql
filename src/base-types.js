@@ -1,6 +1,7 @@
 'use strict';
 
 const _get = require('lodash.get');
+const { documentToHtmlString } = require('@contentful/rich-text-html-renderer');
 
 const {
   GraphQLNonNull,
@@ -68,6 +69,13 @@ const LocationType = new GraphQLObjectType({
   }
 });
 
+const DocumentType = new GraphQLObjectType({
+  name: 'Document',
+  fields: {
+    document: {type: GraphQLString, resolve: documentToHtmlString},
+  }
+});
+
 const CollectionMetaType = new GraphQLObjectType({
   name: 'CollectionMeta',
   fields: {count: {type: GraphQLInt}}
@@ -81,6 +89,7 @@ module.exports = {
   AssetType,
   EntryType,
   LocationType,
+  DocumentType,
   CollectionMetaType
 };
 

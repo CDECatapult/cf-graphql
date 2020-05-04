@@ -11,7 +11,7 @@ const {
   GraphQLList
 } = require('graphql');
 
-const {AssetType, EntryType, LocationType} = require('./base-types.js');
+const {AssetType, EntryType, LocationType, DocumentType} = require('./base-types.js');
 
 const NOTHING = {};
 
@@ -25,6 +25,7 @@ module.exports = {
   Float: field => createFieldConfig(GraphQLFloat, field),
   Bool: field => createFieldConfig(GraphQLBoolean, field),
   Location: field => createFieldConfig(LocationType, field),
+  Document: field => createFieldConfig(DocumentType, field),
   Object: createObjectFieldConfig,
   'Array<String>': createArrayOfStringsFieldConfig,
   'Link<Asset>': createAssetFieldConfig,
